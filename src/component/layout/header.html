@@ -1,0 +1,208 @@
+<div class="header-wrap">
+  <div class="search-bar-wrap">
+    <!-- 这个进入 搜索页 -->
+    <!-- onclick="javascript:window.location.href='/pages/index_page/index_search.html';" -->
+    <div class="search-input-wrap">
+      <i class="iconfont iconfangdajing"></i>
+      <!-- 如果是 在搜索页，则 不需要readonly，  其它页面则需要readonly，且点击后，进入到搜索页 -->
+      <input placeholder="搜索内容" readonly class="my-input" type="text" />
+    </div>
+
+    <div class="find-wrap">
+      <i class="iconfont icondianhua"></i>
+      <p>咨询</p>
+    </div>
+  </div>
+
+  <div class="tabs-bar-wrap">
+    <div class="bs-tabs-wrapper">
+      <ul class="tabs-wrap">
+        <li>
+          <a href="/pages/index_page/index_list.html">
+            <p>标签选择</p>
+          </a>
+        </li>
+        <li>
+          <a href="/pages/index_page/index_list.html">
+            <p>标签选择</p>
+          </a>
+        </li>
+        <li>
+          <a href="/pages/index_page/index_list.html">
+            <p>标签选择</p>
+          </a>
+        </li>
+        <li>
+          <a href="/pages/index_page/index_list.html">
+            <p>标签选择</p>
+          </a>
+        </li>
+        <li class="active">
+          <a href="/pages/index_page/index_list.html">
+            <p>标签选择</p>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- active -->
+    <div class="more-wrap">
+      <i class="iconfont iconmore" id="more-icon"></i>
+    </div>
+  </div>
+</div>
+
+<div class="alert-lable-wrapper">
+  <div class="headder-labeltabs-wrap">
+    <div class="close-wrap">
+      <i class="iconfont icontubiao_close"></i>
+    </div>
+
+    <div class="list-wrap">
+      <div class="ltabs-wrap">
+        <div class="title">标签选择</div>
+        <ul>
+          <li class="active">标签1</li>
+          <li>标签2</li>
+          <li>标签3</li>
+          <li>标签4</li>
+        </ul>
+      </div>
+
+      <div class="ltabs-wrap">
+        <div class="title">标签选择</div>
+        <ul>
+          <li class="active">标签1</li>
+          <li>标签2</li>
+          <li>标签3</li>
+          <li>标签4</li>
+        </ul>
+      </div>
+      <div class="ltabs-wrap">
+        <div class="title">标签选择</div>
+        <ul>
+          <li class="active">标签1</li>
+          <li>标签2</li>
+          <li>标签3</li>
+          <li>标签4</li>
+        </ul>
+      </div>
+      <div class="ltabs-wrap">
+        <div class="title">标签选择</div>
+        <ul>
+          <li class="active">标签1</li>
+          <li>标签2</li>
+          <li>标签3</li>
+          <li>标签4</li>
+        </ul>
+      </div>
+      <div class="ltabs-wrap">
+        <div class="title">标签选择</div>
+        <ul>
+          <li class="active">标签1</li>
+          <li>标签2</li>
+          <li>标签3</li>
+          <li>标签4</li>
+        </ul>
+      </div>
+      <div class="ltabs-wrap">
+        <div class="title">标签选择</div>
+        <ul>
+          <li class="active">标签1</li>
+          <li>标签2</li>
+          <li>标签3</li>
+          <li>标签4</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="alert-phone-wrap">
+  <p class="desc">请联系客服</p>
+  <div class="phone-list">
+    <p class="phone-line">
+      <span class="name">固话：</span>
+      <a href="tel:020-29853807"><span class="num">020-29853807</span></a>
+    </p>
+    <p class="phone-line">
+      <span class="name">手机：</span>
+      <a href="tel:18138746479"><span class="num">18138746479</span></a>
+    </p>
+  </div>
+</div>
+
+<script>
+  var tabsIndex = null;
+  var tabsVisible = false;
+  $("#more-icon").on("click", function () {
+    tabsIndex = layer.open({
+      type: 1,
+      className: "mlaebl-taps-wrap",
+      content: $(".alert-lable-wrapper").html() || "",
+      anim: "up",
+    });
+
+    tabsVisible = true;
+    var scrollTop =
+      document.body.scrollTop || document.documentElement.scrollTop;
+    fixScroll(scrollTop);
+
+    $(".close-wrap").on("click", function () {
+      layer.close(tabsIndex);
+
+      if (!tabsVisible) {
+        resetScrollTop(body.style.top);
+      }
+    });
+  });
+
+  var $headObj = $(".header-wrap");
+  $headObj.on("touchstart touchmove", function () {
+    fixScroll(0);
+  });
+
+  $headObj.on("touchend", function () {
+    resetScrollTop(0);
+  });
+
+  function fixScroll(top) {
+    document.body.style.cssText +=
+      "position:fixed;width:100%;top:-" + top + "px;";
+  }
+
+  function resetScrollTop(top) {
+    var body = document.body;
+    body.style.position = "";
+    document.body.scrollTop = document.documentElement.scrollTop = -parseInt(
+      top,
+    );
+    body.style.top = "";
+  }
+</script>
+<script>
+  var helpIndex = null;
+  $(".find-wrap").on("click", function () {
+    helpIndex = layer.open({
+      className: "malert-phone-wrap",
+      content: $(".alert-phone-wrap").html() || "",
+      btn: "确定",
+    });
+  });
+</script>
+<script>
+  $(function () {
+    var tabScroll = null;
+
+    var TIME_BOUNCE = 800;
+    (function loaded() {
+      tabScroll = new BScroll(".bs-tabs-wrapper", {
+        scrollX: true,
+        bounceTime: TIME_BOUNCE,
+        click: true,
+      });
+    })();
+
+    tabScroll.scrollToElement(".bs-tabs-wrapper li.active", 1000, true, true);
+  });
+</script>

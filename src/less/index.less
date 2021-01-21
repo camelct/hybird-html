@@ -1,0 +1,73 @@
+@import "./layout/default-theme.less";
+
+.index-page-wrap {
+  background-color: rgba(211, 218, 235, .26);
+
+  .bs-wrapper {
+    height: calc(100vh - 380px);
+    overflow: hidden;
+  }
+
+  .tab-list-wrap {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 50px;
+    background-color: #fff;
+
+    li {
+      text-align: center;
+      border-radius: 50%;
+      img {
+        width: 86px;
+        height: 86px;
+        border-radius: 50%;
+      }
+
+      p {
+        font-size: 26px;
+        font-weight: 400;
+        color: rgba(55, 55, 55, 1);
+      }
+    }
+  }
+
+  .common-product-list-wrap {
+    padding: 30px 28px;
+
+    .refresh-wrap {
+      margin-bottom: 20px;
+    }
+
+    .product-list {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0px 0px 20px rgba(171, 194, 230, 0.65);
+    }
+  }
+
+  .footer-wrap {
+    text-align: center;
+    padding: 44px 0 65px;
+    margin: 42px 33px 0;
+    border-top: 2px solid rgba(164, 169, 181, .42);
+
+    .phone {
+      i {
+        color: rgba(53, 139, 252, 1);
+      }
+
+      .num {
+        font-size: 30px;
+        font-weight: bold;
+        color: rgba(53, 139, 252, 1);
+      }
+    }
+
+    .info {
+      font-weight: 400;
+      color: rgba(195, 195, 195, 1);
+      font-size: 24px;
+      margin-top: 8px;
+    }
+  }
+}

@@ -1,0 +1,51 @@
+@import "../layout/default-theme.less";
+
+.index-search-wrap {
+  .search-wrap {
+    margin-top: 50px;
+    .list-wrap {
+      padding: 0 40px;
+
+      .ltabs-wrap {
+        margin-bottom: 70px;
+
+        .title {
+          font-size: 40px;
+          font-weight: bold;
+          color: rgba(41, 46, 54, 1);
+        }
+
+        ul {
+          display: flex;
+          flex-wrap: wrap;
+          margin-top: 35px;
+
+          li {
+            min-width: 194px;
+            background: rgba(228, 234, 241, 1);
+            border-radius: 12px;
+            margin: 0 32px 20px 0;
+            a {
+              display: flex;
+              flex: 1;
+              font-size: 32px;
+              font-weight: 400;
+              padding: 20px 30px;
+              color: rgba(41, 46, 54, 1);
+              justify-content: center;
+              align-items: center;
+            }
+
+            &.active {
+              a {
+                color: rgba(255, 255, 255, 1);
+              }
+              background-color: rgba(119, 53, 252, 1);
+            }
+          }
+        }
+      }
+    }
+  }
+
+}

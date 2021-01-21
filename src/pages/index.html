@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>首页</title>
+  ${require('raw-loader!../component/layout/meta.html')} ${require('raw-loader!../component/layout/linkjs.html')}
+</head>
+
+<body>
+  <div class="base-page-wrap index-page-wrap">
+    <!-- tabs  -->
+    <div class="wrapper-head tabs">
+      ${require('raw-loader!../component/layout/header.html')}
+    </div>
+
+    <ul class="tab-list-wrap">
+      <li>
+        <a href="/pages/index_page/index_list.html">
+          <img width="100%" height="100%" src="https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989_960_720.jpg" alt="">
+          <p>列表1</p>
+        </a>
+      </li>
+      <li>
+        <a href="/pages/index_page/index_list.html">
+          <img width="100%" height="100%" src="https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989_960_720.jpg" alt="">
+          <p>列表2</p>
+        </a>
+      </li>
+      <li>
+        <a href="/pages/index_page/index_list.html">
+          <img width="100%" height="100%" src="https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989_960_720.jpg" alt="">
+          <p>列表3</p>
+        </a>
+      </li>
+      <li>
+        <a href="/pages/index_page/index_list.html">
+          <img width="100%" height="100%" src="https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989_960_720.jpg" alt="">
+          <p>列表4</p>
+        </a>
+      </li>
+    </ul>
+
+    <div class="bs-wrapper">
+      <div class="bs-content">
+
+
+        <div class="common-product-list-wrap">
+          <div class="refresh-wrap">
+            <i class="iconfont iconrefresh"></i>
+          </div>
+
+          <ul class="product-list">
+            <!-- 每4个为一组，一组第一个则为 mhead      has-read 已读-->
+            <li class="mhead has-read">
+              <a href="/pages/index_page/index_detail.html">
+                <p class="title">
+                  标题123
+                </p>
+                <div class="img-wrap">
+                  <img width="100%" height="100%" src="https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989_960_720.jpg" alt="">
+                </div>
+                <div class="desc-wrap">
+                  <div class="read-wrap">
+                    <span class="label-new">new</span>
+                    <i class="iconfont iconeye"></i>
+                    <span class="num">384</span>
+                  </div>
+                  <div class="time">
+                    2019-01-02
+                  </div>
+                </div>
+              </a>
+            </li>
+            <!-- has-read 已读 -->
+            <li class="normal">
+              <a href="/pages/index_page/index_detail.html">
+                <div class="wrap-left">
+                  <p class="title">
+                    标题2
+                  </p>
+                  <div class="desc-wrap">
+                    <div class="read-wrap">
+                      <span class="label-new">热</span>
+                      <i class="iconfont iconeye"></i>
+                      <span class="num">384</span>
+                    </div>
+                    <div class="time">
+                      2019-01-02
+                    </div>
+                  </div>
+                </div>
+                <div class="img-wrap">
+                  <img width="100%" height="100%" src="https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989_960_720.jpg" alt="">
+                </div>
+              </a>
+            </li>
+          </ul>
+
+          ${require('raw-loader!../component/layout/loading.html')}
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="footer-wrap">
+      <div class="phone">
+        <i class="iconfont icondianhua"></i>
+        <span class="num">020-xxxxxxxx</span>
+      </div>
+      <p class="info">tips</p>
+    </div> -->
+  </div>
+</body>
+<script>
+  $(function() {
+    var myScroll = null;
+
+    var TIME_BOUNCE = 800,
+      TIME_STOP = 400,
+      beforePullDown = true, // 根据这个判断 只请求一次  防止多次请求
+      isPullUpLoad = true; // 根据这个判断 只请求一次  防止多次请求
+
+    (function loaded() {
+      myScroll = new BScroll('.bs-wrapper', {
+        scrollY: true,
+        mouseWheel: {
+          speed: 20,
+          invert: false,
+          easeTime: 300
+        },
+        bounceTime: TIME_BOUNCE,
+        pullDownRefresh: {
+          threshold: 70,
+          stop: 56
+        },
+        pullUpLoad: true,
+        click: true
+      })
+    })();
+
+    myScroll.on('pullingDown', pullingDownHandler)
+    myScroll.on('pullingUp', pullingUpHandler)
+
+    // 下拉刷新
+    function pullingDownHandler(e) {
+      $('.refresh-wrap').show();
+      beforePullDown = false
+      // 该方法需要 同步执行
+      requestData()
+      // 请求完之后才执行
+      finishPullDown()
+    }
+
+    // 上拉加载
+    function pullingUpHandler() {
+      isPullUpLoad = true
+      requestData()
+
+      // 请求完之后才执行
+      myScroll.finishPullUp()
+      myScroll.refresh()
+      isPullUpLoad = false
+    }
+
+    // 请求之后需要 刷新
+    function requestData() {
+      // 请求方法，最好是同步返回，不行则写在下面
+      /*
+        error()
+        success() {
+          finishPullDown()
+        }
+      */
+    }
+
+    // 正在 下拉过程中，不请求，
+    function finishPullDown() {
+      // $('.refresh-wrap').hide();
+
+      // 只是测试用，真正请求后， 将 settimeout 去掉即可
+      setTimeout(() => {
+        $('.refresh-wrap').hide();
+      }, 2000);
+
+      const stopTime = TIME_STOP
+      setTimeout(() => {
+        myScroll.finishPullDown()
+      }, TIME_STOP)
+
+      setTimeout(() => {
+        this.beforePullDown = true
+        myScroll.refresh()
+      }, TIME_BOUNCE)
+    }
+  })
+</script>
+
+</html>

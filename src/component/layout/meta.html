@@ -1,0 +1,66 @@
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<meta name="App-Config" content="fullscreen=yes,useHistoryState=yes,transition=yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="format-detection" content="telephone=no,email=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-status-bar-style" content="white">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<link crossorigin="anonymous" integrity="sha384-AzQbapSukb9G0XX6IpFqo+wJTJUIh3B5Ql3x9OLq4/Td1bGT4xOk/Oehaz5y6Hef" href="https://lib.baomitu.com/layer/3.1.1/theme/default/layer.css" rel="stylesheet">
+
+<script>
+  (function flexible(window, document) {
+    var docEl = document.documentElement
+    var dpr = window.devicePixelRatio || 1
+
+    // adjust body font size
+    function setBodyFontSize() {
+      if (document.body) {
+        document.body.style.fontSize = (12 * dpr) + 'px'
+      } else {
+        document.addEventListener('DOMContentLoaded', setBodyFontSize)
+      }
+    }
+    setBodyFontSize();
+
+    // set 1rem = viewWidth / 10
+    function setRemUnit() {
+      var cw = docEl.clientWidth;
+      var rem = 0;
+      if (cw >= 640) {
+        rem = 64
+      } else {
+        if (cw <= 320) {
+          rem = 32
+        } else {
+          rem = cw / 10
+        }
+      }
+
+      docEl.style.fontSize = rem + 'px'
+    }
+
+    setRemUnit()
+
+    // reset rem unit on page resize
+    window.addEventListener('resize', setRemUnit)
+    window.addEventListener('pageshow', function(e) {
+      if (e.persisted) {
+        setRemUnit()
+      }
+    })
+
+    // detect 0.5px supports
+    if (dpr >= 2) {
+      var fakeBody = document.createElement('body')
+      var testElement = document.createElement('div')
+      testElement.style.border = '.5px solid transparent'
+      fakeBody.appendChild(testElement)
+      docEl.appendChild(fakeBody)
+      if (testElement.offsetHeight === 1) {
+        docEl.classList.add('hairlines')
+      }
+      docEl.removeChild(fakeBody)
+    }
+  }(window, document))
+</script>
