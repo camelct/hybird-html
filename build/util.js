@@ -58,6 +58,9 @@ const getHtmlWebPackArr = (route) => {
 
   itera(route);
 
+  console.log('entry', JSON.stringify(entry, null, '  '));
+  console.log('htmlWebpackPlugins', JSON.stringify(htmlWebpackPlugins, null, '  '));
+
   return {
     entry,
     htmlWebpackPlugins
