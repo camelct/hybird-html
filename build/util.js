@@ -22,7 +22,7 @@ const baseFilePlugin = {
   // }
 }
 
-const getHtmlWebPackArr = (route) => {
+const getHtmlWebPackArr = (root) => {
   const entry = {};
   const htmlWebpackPlugins = [];
 
@@ -34,12 +34,14 @@ const getHtmlWebPackArr = (route) => {
         const extension = path.extname(filename);
         const name = filename.substring(0, filename.lastIndexOf(extension));
 
-        const foldName = route.match(/pages\\(.+)/);
+        const foldName = route.match(/pages[\\|\/](.+)/);
         let tempFoldName = '';
         if (foldName) {
           tempFoldName = foldName[0];
         }
 
+        console.log('foldName', foldName);
+        console.log('tempFoldName', tempFoldName);
         const oHtmlWebpackPluginTemp = new HtmlWebpackPlugin({
           filename: `${tempFoldName ? tempFoldName + '/' : ''}${name}.html`,
           template: resolvePath(`${route}/${name}.html`),
@@ -56,10 +58,10 @@ const getHtmlWebPackArr = (route) => {
     })
   }
 
-  itera(route);
+  itera(root);
 
-  console.log('entry', JSON.stringify(entry, null, '  '));
-  console.log('htmlWebpackPlugins', JSON.stringify(htmlWebpackPlugins, null, '  '));
+  // console.log('entry', JSON.stringify(entry, null, '  '));
+  // console.log('htmlWebpackPlugins', JSON.stringify(htmlWebpackPlugins, null, '  '));
 
   return {
     entry,
