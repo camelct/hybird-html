@@ -92,7 +92,7 @@ const webpackConfig = {
       },
     },
   },
-  // stats: "errors-only",
+  stats: "errors-only",
 };
 
 module.exports = webpackConfig;
