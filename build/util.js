@@ -40,8 +40,6 @@ const getHtmlWebPackArr = (root) => {
           tempFoldName = foldName[0];
         }
 
-        console.log('foldName', foldName);
-        console.log('tempFoldName', tempFoldName);
         const oHtmlWebpackPluginTemp = new HtmlWebpackPlugin({
           filename: `${tempFoldName ? tempFoldName + '/' : ''}${name}.html`,
           template: resolvePath(`${route}/${name}.html`),
@@ -59,9 +57,6 @@ const getHtmlWebPackArr = (root) => {
   }
 
   itera(root);
-
-  // console.log('entry', JSON.stringify(entry, null, '  '));
-  // console.log('htmlWebpackPlugins', JSON.stringify(htmlWebpackPlugins, null, '  '));
 
   return {
     entry,
